@@ -1,0 +1,50 @@
+<%= link_to "New Post",new_post_path,:class=>"btn btn-success"%>
+<br/>
+<br/>
+<div>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  <thead>
+  <tbody>    
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%=link_to post.title,post_path(post)%></td>
+      <td><%= post.body.truncate(25)%></td>
+      <td>
+        <%= link_to "Edit",edit_post_path(post),:class=>"btn btn-success"%> |
+        <%= link_to "Delete",post_path(post),:class=>"btn btn-primary",:method=>:delete,:data=>{:confirm=>"Are You sure?"}%> |
+      </td>
+    </tr>
+  <% end %>
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @posts %>
+    </div>
+    <%= will_paginate @posts, :container => false %>
+  </div>
+  </tbody>
+</table>  
+Top 5 Recent Posts :
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  <thead>
+  <tbody>    
+  <% @results.each do |result| %>
+    <tr>
+      <td><%= result.title%></td>
+      <td><%= result.body%></td>
+      
+    </tr>
+  <% end %>
+  </tbody>
+</table>  
+
+</div>

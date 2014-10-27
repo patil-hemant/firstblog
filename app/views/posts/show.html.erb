@@ -1,0 +1,12 @@
+Title : <%= @post.title%>
+<br />
+Descriotion : <%= @post.body%><br><br>
+Comments : Total Comments <%= @post.comments.count%>
+<%@post.comments.each do |c|%><br><br>
+<%= c.comment_description %>
+<%end%>
+<br><br>
+<%= form_for(:comment, :url => {:action=>"create"}, :html => { :multipart => true}) do |c| %>
+  <%= c.text_area :comment_description %>
+  <%= submit_tag "Add Comment" %>
+ <% end %>
